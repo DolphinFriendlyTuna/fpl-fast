@@ -20,9 +20,6 @@ def get_league_entries(league_code, max_workers=10):
 
         league_info = session.get(league_url).result().json()
 
-        print(league_info['league']['name'])
-        print('')
-
         team_requests = []
         for team in league_info['standings']['results']:
             team_url = f'{ROOT_URL}/entry/{team["entry"]}'
