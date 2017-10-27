@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, render_template, request
 
-from fpl_fast.request import get_league_entries
+from fpl_fast.fpl import get_league_entries
 
 app = Flask(__name__)
 logging.basicConfig()
