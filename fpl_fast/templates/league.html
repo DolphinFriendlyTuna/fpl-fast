@@ -5,11 +5,38 @@
     <title>Title</title>
 </head>
 <body>
-<ul>
+<table id="league_table" class="league_table">
+    <tr>
+        <th>User</th>
+        <th>Team</th>
+        <th>GW</th>
+        <th>Total</th>
+    </tr>
     {% for team in teams %}
-    <li>{{ team }}</li>
+    <tr>
+        <td>{{ team.player_first_name }} {{ team.player_last_name }}</td>
+        <td>{{ team.name }}</td>
+        <td>{{ team.summary_event_points }}</td>
+        <td>{{ team.summary_overall_points }}</td>
+    </tr>
     {% endfor %}
-</ul>
-
+</table>
+<br>
+<table id="player_table" class="player_table">
+    <tr>
+        <th>Player</th>
+        <th>Team</th>
+        <th>Selected %</th>
+        <th>Captain %</th>
+    </tr>
+    {% for player in players %}
+    <tr>
+        <td>{{ player.web_name }}</td>
+        <td>{{ player.team_name }}</td>
+        <td>{{ player.selected_by_prct }}</td>
+        <td>{{ player.captain_prct }}</td>
+    </tr>
+    {% endfor %}
+</table>
 </body>
 </html>

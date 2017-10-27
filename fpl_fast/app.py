@@ -23,10 +23,16 @@ def league():
     if not league_code:
         return "ERROR: no league code supplied."
 
-    teams = list(get_league_entries(league_code))
+    #teams = list(get_league_entries(league_code))
+    # FIXME: Remove this block
+    import json
+    with open('C:/Users/antma/PycharmProjects/fpl-fast/test/resources/league-entries-44772.json') as f:
+        teams = json.load(f)
     logger.debug(teams)
 
-    return render_template('league.html', teams=teams)
+    teams = sorted(teams, key=lambda x: x['summary_overall_points'], reverse=True)
+
+    return render_template('league.html', teams=teams, players=[])
 
 
 if __name__ == '__main__':
