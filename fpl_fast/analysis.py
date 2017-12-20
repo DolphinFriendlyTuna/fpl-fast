@@ -33,13 +33,15 @@ def player_statistics(bootstrap, picks_by_user):
                 if p['is_captain']:
                     result[id]['captain_by'].append(entry_id)
 
+    no_picks_by_user = len(picks_by_user)
+
     for id in result:
         selected_by = len(result[id]['selected_by'])
-        selected_by_prct = selected_by / len(picks_by_user) * 100
+        selected_by_prct = selected_by / no_picks_by_user * 100
         result[id]['selected_by_prct'] = selected_by_prct
 
         captain_by = len(result[id]['captain_by'])
-        captain_by_prct = captain_by / selected_by * 100
+        captain_by_prct = captain_by / no_picks_by_user * 100
         result[id]['captain_by_prct'] = captain_by_prct
 
     return list(result.values())
