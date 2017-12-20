@@ -5,7 +5,7 @@ def player_statistics(bootstrap, picks_by_user):
     
     :param bootstrap: big fpl bootstrap dict
     :param picks_by_user: picks by team
-    :return: dict
+    :return: list of selected players
     """
 
     elements = {i['id']: i for i in bootstrap['elements']}
@@ -13,8 +13,8 @@ def player_statistics(bootstrap, picks_by_user):
 
     result = {}
 
-    for picks in picks_by_user:
-        for p in picks:
+    for entry_id, data in picks_by_user.items():
+        for p in data['picks']:
             e = elements[p['element']]
 
             id = e['id']
@@ -23,22 +23,23 @@ def player_statistics(bootstrap, picks_by_user):
                 # we need to setup some defaults
                 d = {}
                 d['name'] = e['web_name']
-                d['team'] = teams[e['team_code']]['name']
+                d['team'] = teams[e['team']]['name']
                 d['points'] = e['event_points']  # TODO: check this is correct (might not update live)
-                d['selected_by'] = 1
-                d['captain_by'] = 1 if p['is_captain'] else 0
+                d['selected_by'] = [entry_id]
+                d['captain_by'] = [entry_id] if p['is_captain'] else []
                 result[id] = d
             else:
-                result[id]['selected_by'] += 1
-                result[id]['captain_by'] += 1 if p['is_captain'] else 0
+                result[id]['selected_by'].append(entry_id)
+                if p['is_captain']:
+                    result[id]['captain_by'].append(entry_id)
 
     for id in result:
-        selected_by = result[id]['selected_by']
+        selected_by = len(result[id]['selected_by'])
         selected_by_prct = selected_by / len(picks_by_user) * 100
         result[id]['selected_by_prct'] = selected_by_prct
 
-        captain_by = result[id]['captain_by']
+        captain_by = len(result[id]['captain_by'])
         captain_by_prct = captain_by / selected_by * 100
-        result[id]['selected_by_prct'] = captain_by_prct
+        result[id]['captain_by_prct'] = captain_by_prct
 
-    return result
+    return list(result.values())

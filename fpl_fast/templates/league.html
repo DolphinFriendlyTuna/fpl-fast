@@ -26,15 +26,17 @@
     <tr>
         <th>Player</th>
         <th>Team</th>
+        <th>Points</th>
         <th>Selected %</th>
         <th>Captain %</th>
     </tr>
     {% for player in players %}
     <tr>
-        <td>{{ player.web_name }}</td>
-        <td>{{ player.team_name }}</td>
+        <td>{{ player.name }}</td>
+        <td>{{ player.team }}</td>
+        <td>{{ player.points }}</td>
         <td>{{ player.selected_by_prct }}</td>
-        <td>{{ player.captain_prct }}</td>
+        <td>{{ player.captain_by_prct }}</td>
     </tr>
     {% endfor %}
 </table>

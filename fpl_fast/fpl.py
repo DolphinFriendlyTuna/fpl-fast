@@ -51,7 +51,9 @@ def get_picks(gameweek, entry_ids, max_workers=10):
         team_requests = []
         for id in entry_ids:
             team_url = f'{ROOT_URL}/entry/{id}/event/{gameweek}/picks'
-            team_requests.append(session.get(team_url))
+            request = session.get(team_url)
+            request.entry_id = id
+            team_requests.append(request)
 
         for request in as_completed(team_requests):
-            yield request.result().json()
+            yield request.entry_id, request.result().json()
