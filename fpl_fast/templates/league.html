@@ -13,28 +13,30 @@
 <body>
 <h1>FPL FAST</h1>
 <div class="d-flex p-2">
-<table id="league_table" class="table">
-    <thead class="thead-light">
-    <tr>
-        <th>Team</th>
-        <th>User</th>
-        <th>GW</th>
-        <th>Total</th>
-    </tr>
-    </thead>
-    {% for team in teams %}
-    <tr>
-        <td><a href="https://fantasy.premierleague.com/a/team/{{ team.id }}">{{ team.name }}</a></td>
-        <td>{{ team.player_first_name }} {{ team.player_last_name }}</td>
-        <td>{{ team.summary_event_points }}</td>
-        <td>{{ team.summary_overall_points }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    <table id="league_table" class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>Team</th>
+            <th>User</th>
+            <th>GW</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+        <tr>
+            <td><a href="https://fantasy.premierleague.com/a/team/{{ team.id }}">{{ team.name }}</a></td>
+            <td>{{ team.player_first_name }} {{ team.player_last_name }}</td>
+            <td>{{ team.summary_event_points }}</td>
+            <td>{{ team.summary_overall_points }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 <div class="d-flex p-2">
-    <table id="player_table" class="table">
-    <thead class="thead-light">
+    <table id="player_table" class="table table-hover">
+        <thead class="thead-light">
         <tr>
             <th>Player</th>
             <th>Team</th>
@@ -42,17 +44,19 @@
             <th>Selected %</th>
             <th>Captain %</th>
         </tr>
-    </thead>
-    {% for player in players %}
-    <tr>
-        <td>{{ player.name }}</td>
-        <td>{{ player.team }}</td>
-        <td>{{ player.points }}</td>
-        <td>{{ player.selected_by_prct }}</td>
-        <td>{{ player.captain_by_prct }}</td>
-    </tr>
-    {% endfor %}
-</table>
+        </thead>
+        <tbody>
+        {% for player in players %}
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>{{ player.team }}</td>
+            <td>{{ player.points }}</td>
+            <td>{{ player.selected_by_prct }}</td>
+            <td>{{ player.captain_by_prct }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 
 <!-- Optional JavaScript -->
