@@ -22,6 +22,7 @@ def player_statistics(bootstrap, picks_by_user):
             if id not in result:
                 # we need to setup some defaults
                 d = {}
+                d['id'] = id
                 d['name'] = e['web_name']
                 d['team'] = teams[e['team']]['name']
                 d['points'] = e['event_points']  # TODO: check this is correct (might not update live)
